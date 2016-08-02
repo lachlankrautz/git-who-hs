@@ -29,4 +29,4 @@ main = do
         "--format=%(authorname)^~^%(refname:short)^~^%(committerdate:iso8601)",
         "refs/remotes/origin" ]){ std_out = CreatePipe }
     gitOut <- hGetContents hout
-    putStrLn (intercalate "\n" (map branchStr (filter validBranch (splitOn "\n" gitOut))))
+    (putStrLn . intercalate "\n" . map branchStr . filter validBranch . splitOn "\n") gitOut
